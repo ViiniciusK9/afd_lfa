@@ -9,8 +9,8 @@ class AFND:
 
     def processar_tokens(self):
         for token in self.list_tokens:
-            if (len(token) != 0):
-                    continue
+            if (len(token) == 0):
+                continue
             if (not self.list_states):
                 # esta vazia - criar estado inicial
                 
