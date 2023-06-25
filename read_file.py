@@ -14,7 +14,7 @@ gr = list()
 flag = 0
 
 
-with open("input", "r") as file:
+with open("input", "r", encoding="utf-8") as file:
     for line in file:
         #print(line[0], line[1])
         if ("$" == line[0] and "$" == line[1]):
@@ -43,12 +43,17 @@ afnd = AFND(lista_token, lista_gr)
 
 print(afnd.list_states)
 afnd.processar_tokens()
+afnd.processar_gr()
 print(afnd.list_states, " tamanho: ", len(afnd.list_states))
 
+afnd.print_afnd()
 
+
+'''
 for state in afnd.list_states:
     print(f"State: {state.identifier}\nInitial: {state.initial}\nFinal: {state.final}\n", end="")
     print("Ways: ")
     for way in state.ways:
         print(way)
 
+'''
