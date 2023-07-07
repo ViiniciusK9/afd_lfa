@@ -2,6 +2,6 @@ se
 entao
 senao
 $
-<S> ::= a<A> | e<A> | i<A> | o<A> | u<A>
+<S> ::= a<A> | e<A> | x | i<A> | o<A> | u<A> | a
 <A> ::= a<A> | e<A> | i<A> | o<A> | u<A> | ε
 $$

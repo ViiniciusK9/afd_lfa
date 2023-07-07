@@ -64,11 +64,14 @@ class AFND:
                 # Logica para o estado atual
                 state = ''
                 if (letra_estado_atual == 'S'):
+                    # Se for o estado inicial sempre representado pela letra "S"
                     if (not self.list_states):
+                        # Se não possui nenhum estado la lista de estados, cria o estado inicial
                         state = STATE(True, self.quantity_state)
                         self.quantity_state += 1
                         l_to_id['S'] = 0
                     else :
+                        # Caso contratio obtem o estado inicial
                         state = self.get_initial_state()
                         l_to_id['S'] = 0
                 else:
@@ -88,6 +91,7 @@ class AFND:
                 
                 for way in ways:
                     if (len(way) == 2):
+                        # Transição para um não terminal
                         if (l_to_id.get(way[0]) == None):
                             # não existe esse estado
                             l_to_id[way[0]] = self.quantity_state
@@ -101,9 +105,19 @@ class AFND:
                             state.add_way(l_to_id.get(way[0]), way[1])
                             
                     elif (way[0] == "ε"):
+                        # Possuio epsilon
                         state.final = True
+                    else:
+                        # Transição de um terminal
+                        new_state = STATE(False, self.quantity_state)
+                        new_state.final = True
+                        self.quantity_state += 1
+                        self.list_states.append(new_state)
+                        self.header.add(way[0])
+                        state.add_way(new_state.identifier, way[0])
                         
-
+                        
+                    
 
     def get_initial_state(self) -> STATE:
         for state in self.list_states:
@@ -157,16 +171,24 @@ class AFND:
 
         print(tabulate(mat_aux, headers, tablefmt="heavy_grid"))
         
-        
-
 
 def get_ways(row):
         ways = list()
-        row = row[7:]
+        row = row.replace(" ", "")
+        flag = 0
         len_r = len(row)
         for i in range(len_r):
-            if (row[i] == '<'):
+            if (row[i] == '='):
+                flag = 1
+            elif (flag and row[i] == '<'):
                 ways.append((row[i+1], row[i-1]))
+            elif (flag and row[i] == '|' and row[i-1] != '>'):
+                ways.append((row[i-1]))
+
+        if (row[len(row)-1] != '>' and row[len(row)-1] != 'ε'):
+            ways.append((row[len(row)-1]))
+        
+        # Verifica se tem épsilon transição na gramatica
         if ("ε" in row):
             ways.append(("ε"))
         return ways
