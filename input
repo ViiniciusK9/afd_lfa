@@ -1,7 +1,8 @@
 se
 entao
 senao
+elif
 $
-<S> ::= a<A> | e<A> | x | i<A> | o<A> | u<A> | a
+<S> ::= a<A> | e<A> | i<A> | o<A> | u<A> | x
 <A> ::= a<A> | e<A> | i<A> | o<A> | u<A> | ε
 $$

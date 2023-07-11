@@ -4,6 +4,7 @@ class STATE:
         self.initial = initial
         self.identifier = identifier
         self.final = False
+        self.mult = None
     
 
     def add_way(self, identifie_state, way):

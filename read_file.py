@@ -6,6 +6,7 @@ se for uma GR -> tratar GR
 
 """
 from afnd import AFND
+from afd import AFD
 
 lista_token = list()
 lista_gr = list()
@@ -47,6 +48,12 @@ afnd.processar_gr()
 print(afnd.list_states, " tamanho: ", len(afnd.list_states))
 
 afnd.print_afnd()
+
+afd = AFD(afnd=afnd)
+
+afd.determinar()
+
+afd.print_afd()
 
 
 '''
