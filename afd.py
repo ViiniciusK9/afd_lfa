@@ -101,7 +101,60 @@ class AFD():
             print(dic)
             print(s)
     
-    
+
+    def minimizar(self):
+        """
+            Remover estados mortos e inalcançáveis, porem devido a forma de determinação do automato
+            já eliminamos os estados inalcançaveis com isso iremos apenas remover os estados mortos.
+        """
+        for state in self.list_states:
+            flag = False
+            q = queue.Queue()
+            q.put(state)
+            while (not q.empty()):
+                at_state = q.get()
+                if (at_state.final == True):
+                    flag = True
+                    break
+                for way in at_state.ways:
+                    q.put(get_state(self.list_states, way[0]))
+
+
+            if (not flag):
+                self.list_states.remove(state)
+
+
+    def add_estados_erro(self):
+        """
+            Adicicionar estado de erro em todas as transições vazias
+        """
+        if (not exists_state_error(self.list_states)):
+
+            self.list_states.append(STATE(initial=False, identifier=-1))
+
+            for state in self.list_states:
+                s = set()
+                for way in state.ways:
+                    s.add(way[1])
+                
+                aux = self.header.difference(s)
+                for tr in aux:
+                    state.add_way(-1, tr)
+        
+
+def exists_state_error(list_states) -> bool:
+    flag = False
+    for state in list_states:
+        if (state.identifier == -1):
+            flag = True
+    return flag
+
+
+def get_state(list_states, id) -> STATE | None:
+    for state in list_states:
+        if (state.identifier == id):
+            return state
+    return None
         
 def exists_state(list_states, id) -> bool:
     flag = False

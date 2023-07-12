@@ -13,7 +13,7 @@ class AFND:
         for token in self.list_tokens:
             if (len(token) == 0):
                 continue
-            if (not self.list_states):
+            if (len(self.list_states) == 0):
                 # esta vazia - criar estado inicial
                 
                 initial_state = STATE(True, self.quantity_state)
@@ -50,7 +50,7 @@ class AFND:
             l_to_id = dict()
             
             for row in gr:
-                
+                print(l_to_id)
                 """
                 Saber qual estado esta, caso sejá o estado inicial se ele já estiver criado apenas obter ele, caso não esteja criado criar o estado inicial
                 """
@@ -65,9 +65,10 @@ class AFND:
                 state = ''
                 if (letra_estado_atual == 'S'):
                     # Se for o estado inicial sempre representado pela letra "S"
-                    if (not self.list_states):
+                    if (len(self.list_states) == 0):
                         # Se não possui nenhum estado la lista de estados, cria o estado inicial
                         state = STATE(True, self.quantity_state)
+                        self.list_states.append(state)
                         self.quantity_state += 1
                         l_to_id['S'] = 0
                     else :

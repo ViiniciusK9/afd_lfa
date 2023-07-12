@@ -47,14 +47,24 @@ afnd.processar_tokens()
 afnd.processar_gr()
 print(afnd.list_states, " tamanho: ", len(afnd.list_states))
 
+print("AFND")
 afnd.print_afnd()
 
 afd = AFD(afnd=afnd)
 
 afd.determinar()
 
+print("AFD")
 afd.print_afd()
 
+afd.minimizar()
+
+print("AFD MINIMIZADO")
+afd.print_afd()
+
+afd.add_estados_erro()
+print("AFD MINIMIZADO COM ESTADO DE ERRO")
+afd.print_afd()
 
 '''
 for state in afnd.list_states:
