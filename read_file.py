@@ -52,7 +52,7 @@ afnd.print_afnd()
 
 afd = AFD(afnd=afnd)
 
-afd.determinar()
+#afd.determinar()
 
 print("AFD")
 afd.print_afd()

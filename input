@@ -1,7 +1,7 @@
-se
-entao
-senao
 $
-<S> ::= a<A> | e<A> | i<A> | o<A> | u<A> | x
-<A> ::= a<A> | e<A> | i<A> | o<A> | u<A> | ε
+<S> ::= a<A> | a<C> | b<B> | b<C>
+<A> ::= a<F> | a
+<B> ::= b<F> | b
+<C> ::= a<A> | a<C> | b<B> | b<C>
+<F> ::= a<F> | b<F> | a | b
 $$

@@ -7,6 +7,7 @@ class AFD():
     def __init__(self, afnd : AFND) -> None:
         self.afnd = afnd
         self.list_states = list()
+        self.list_states_aux = list()
         self.quantity_state = afnd.quantity_state
         self.header = afnd.header
     
@@ -65,8 +66,8 @@ class AFD():
             current_state.final = state.final
             
             if (exists_state(self.list_states, current_state.identifier)):
-                remove_state(self.list_states, current_state.identifier)
-            
+                continue
+
             for way in state.ways:
                 if (dic.get(way[1]) != None):
                     dic[way[1]].append(way[0])
@@ -79,7 +80,7 @@ class AFD():
                     current_state.add_way(v[0], k)
                     s.add(v[0])
                 else:
-                    if(not exists_mult_state(self.list_states, v)):
+                    if(not exists_mult_state(self.list_states_aux, v)):
                         new_state = STATE(identifier= self.quantity_state, initial=False)
                         new_state.mult = v
                         self.quantity_state += 1
@@ -89,15 +90,16 @@ class AFD():
                                 new_state.final = True
                             for way in aux_state.ways:
                                 new_state.add_way(way[0], way[1])
-                        self.list_states.append(new_state)
                         current_state.add_way(self.quantity_state - 1, k)
                         q.put(new_state)
-                        
+                        self.list_states_aux.append(new_state)
+            
             self.list_states.append(current_state)
             for i in s:
                 if (not exists_state(self.list_states, i)):
                     q.put(self.afnd.get_state(i))         
             
+            print(f"ESTADO ATUAL: {current_state.identifier}\n ")
             print(dic)
             print(s)
     
@@ -161,7 +163,6 @@ def exists_state(list_states, id) -> bool:
     for state in list_states:
         if (state.identifier == id):
             flag = True
-            break
 
     return flag
 
