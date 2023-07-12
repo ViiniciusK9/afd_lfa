@@ -70,9 +70,14 @@ class AFD():
 
             for way in state.ways:
                 if (dic.get(way[1]) != None):
-                    dic[way[1]].append(way[0])
+                    dic[way[1]].add(way[0])
                 else:
-                    dic[way[1]] = [way[0]]
+                    dic[way[1]] = set()
+                    dic[way[1]].add(way[0])
+            
+            for k in dic.keys():
+                dic[k] = list(dic[k])
+
             
             s = set()
             for k, v in dic.items():
@@ -113,13 +118,20 @@ class AFD():
             flag = False
             q = queue.Queue()
             q.put(state)
+
+            visited = list()
+            for i in range(self.quantity_state):
+                visited.append(0)
+
             while (not q.empty()):
                 at_state = q.get()
+                visited[at_state.identifier] = 1
                 if (at_state.final == True):
                     flag = True
                     break
                 for way in at_state.ways:
-                    q.put(get_state(self.list_states, way[0]))
+                    if (visited[way[0]] == 0):
+                        q.put(get_state(self.list_states, way[0]))
 
 
             if (not flag):

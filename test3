@@ -1,0 +1,19 @@
+$
+<S> ::= a<A> | b<B> | a
+<A> ::= a<S> | b<C>
+<B> ::= a<C> | b<S>
+<C> ::= a<B> | b<A> | b
+$$
+$
+<S> ::= a<A> | b<B> | b | c<S> | c | ε
+<A> ::= a<S> | a | b<C> | c<A>
+<B> ::= a<A> | c<B> | c<S> | c
+<C> ::= a<S> | a | c<A> | c<C>
+$$
+se
+entao
+senao
+$
+<S> ::= a<A> | e<A> | i<A> | o<A> | u<A> | x
+<A> ::= a<A> | e<A> | i<A> | o<A> | u<A> | ε
+$$
