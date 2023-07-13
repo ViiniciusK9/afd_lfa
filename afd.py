@@ -21,14 +21,18 @@ class AFD():
         
         for state in self.list_states:
             aux = dict()
+            """ Utilização apenas para DEBUG
             print(state.identifier, " | ", end="")
+            """
             for way in state.ways:
                 if(aux.get(way[1]) != None):
                     aux[way[1]] = f"{aux[way[1]]}, {way[0]}"
                 else:
                     aux[way[1]] = f"{way[0]}"
+                """ Utilização apenas para DEBUG
                 print(way, end=" ")
-            print()
+                """
+            #print()
             for header in headers:
                 if(not (aux.get(header) != None)):
                     aux[header] = ""
@@ -46,9 +50,10 @@ class AFD():
             mat_aux.append(aux_list.copy())
 
         headers.insert(0, "Estados")
+        """ Utilização apenas para DEBUG
         for key, values in mat.items():
             print(key, values)
-        
+        """
 
         print(tabulate(mat_aux, headers, tablefmt="heavy_grid"))
     
@@ -102,11 +107,13 @@ class AFD():
             self.list_states.append(current_state)
             for i in s:
                 if (not exists_state(self.list_states, i)):
-                    q.put(self.afnd.get_state(i))         
-            
+                    q.put(self.afnd.get_state(i))     
+                        
+            """ Utilização apenas para DEBUG
             print(f"ESTADO ATUAL: {current_state.identifier}\n ")
             print(dic)
             print(s)
+            """
     
 
     def minimizar(self):

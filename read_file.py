@@ -1,10 +1,3 @@
-"""
-Ler a linha
-identificar se é um token
-se for token -> tratar token
-se for uma GR -> tratar GR
-
-"""
 from afnd import AFND
 from afd import AFD
 
@@ -14,7 +7,7 @@ gr = list()
 
 flag = 0
 
-
+# Leitura do arquivo de entrada separando os dados em uma lista de GR e uma lista de Tokens
 with open("input", "r", encoding="utf-8") as file:
     for line in file:
         #print(line[0], line[1])
@@ -32,20 +25,18 @@ with open("input", "r", encoding="utf-8") as file:
             lista_token.append(line.replace("\n", ""))
 
 
-    
+""" Utilização apenas para DEBUG
 for token in lista_token:
     print(token)
 
 for gra in lista_gr:
     print(gra)
-
+"""
 
 afnd = AFND(lista_token, lista_gr)
 
-print(afnd.list_states)
 afnd.processar_tokens()
 afnd.processar_gr()
-print(afnd.list_states, " tamanho: ", len(afnd.list_states))
 
 print("AFND")
 afnd.print_afnd()
@@ -66,11 +57,4 @@ afd.add_estados_erro()
 print("AFD MINIMIZADO COM ESTADO DE ERRO")
 afd.print_afd()
 
-'''
-for state in afnd.list_states:
-    print(f"State: {state.identifier}\nInitial: {state.initial}\nFinal: {state.final}\n", end="")
-    print("Ways: ")
-    for way in state.ways:
-        print(way)
 
-'''

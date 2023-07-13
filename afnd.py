@@ -50,7 +50,7 @@ class AFND:
             l_to_id = dict()
             
             for row in gr:
-                print(l_to_id)
+                #print(l_to_id)
                 """
                 Saber qual estado esta, caso sejá o estado inicial se ele já estiver criado apenas obter ele, caso não esteja criado criar o estado inicial
                 """
@@ -141,14 +141,18 @@ class AFND:
         
         for state in self.list_states:
             aux = dict()
+            """ Utilização apenas para DEBUG
             print(state.identifier, " | ", end="")
+            """
             for way in state.ways:
                 if(aux.get(way[1]) != None):
                     aux[way[1]] = f"{aux[way[1]]}, {way[0]}"
                 else:
                     aux[way[1]] = f"{way[0]}"
+                """ Utilização apenas para DEBUG
                 print(way, end=" ")
-            print()
+                """
+            #print()
             for header in headers:
                 if(not (aux.get(header) != None)):
                     aux[header] = ""
@@ -166,9 +170,10 @@ class AFND:
             mat_aux.append(aux_list.copy())
 
         headers.insert(0, "Estados")
+        """ Utilização apenas para DEBUG
         for key, values in mat.items():
             print(key, values)
-        
+        """
 
         print(tabulate(mat_aux, headers, tablefmt="heavy_grid"))
         
