@@ -121,6 +121,8 @@ class AFD():
             Remover estados mortos e inalcançáveis, porem devido a forma de determinação do automato
             já eliminamos os estados inalcançaveis com isso iremos apenas remover os estados mortos.
         """
+        estados_removidos = list()
+
         for state in self.list_states:
             flag = False
             q = queue.Queue()
@@ -142,8 +144,15 @@ class AFD():
 
 
             if (not flag):
+                estados_removidos.append(state.identifier)
                 self.list_states.remove(state)
 
+
+        # removendo as transições para os estados que foram removidos
+        for state in self.list_states:
+            for way in state.ways:
+                if(way[0] in estados_removidos):
+                    state.ways.remove(way)
 
     def add_estados_erro(self):
         """

@@ -1,7 +1,4 @@
 $
-<S> ::= a<A> | b<B> | a
-<A> ::= a<S> | b<C>
-<B> ::= a<C> | b<S> | c<D>
-<C> ::= a<B> | b<A> | b
-<D> ::= a<D> | c<D>
+<S> ::= a<A> | e<A> | i<A> | o<A> | u<A> | x
+<A> ::= a<A> | e<A> | i<A> | o<A> | u<A> | ε
 $$
